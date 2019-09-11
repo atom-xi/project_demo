@@ -4,7 +4,7 @@ const webpack = require("webpack")
 const path = require("path")
 const OpenBrowserPlugin = require("open-browser-webpack-plugin")
 
-module.exports = merge(common, {
+const option = {
   mode: "development",
   output: {
     filename: "js/[name].[hash:8].js",
@@ -21,4 +21,6 @@ module.exports = merge(common, {
     new webpack.HotModuleReplacementPlugin(),
     new OpenBrowserPlugin({ url: "http://localhost:3000" })
   ]
-})
+}
+
+module.exports = merge(common, option)

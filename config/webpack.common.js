@@ -1,10 +1,7 @@
-const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CleanWebpackPlugin = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const webpack = require("webpack")
 
-console.log("process.env.NODE_ENV", env.NODE_ENV)
 const ENV = process.env.NODE_ENV
 
 module.exports = {
@@ -13,11 +10,6 @@ module.exports = {
     app: "./src/view/index.js",
     ventor: ["axios"]
   },
-  // output: {
-  //   filename: "js/[name].[hash:8].js",
-  //   path: path.resolve(__dirname, "../dist"),
-  //   publicPath: "/"
-  // },
   plugins: [
     new CleanWebpackPlugin(), //新版本默认删除webpack输出中的所有文件
     // new CleanWebpackPlugin(["./dist"], {
@@ -69,7 +61,15 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader
           },
-          "css-loader"
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: [
+                require("autoprefixer")
+              ]
+            }
+          }
         ]
       },
       {
