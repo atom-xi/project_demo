@@ -1,8 +1,11 @@
 const path = require("path")
 const merge = require("webpack-merge")
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin")
+const CleanWebpackPlugin = require("clean-webpack-plugin")
+
 const TerserWebpackPlugin = require("terser-webpack-plugin")
 const common = require("./webpack.common.js")
+
 
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 
@@ -16,15 +19,18 @@ let option = {
     publicPath: "./"
   },
   plugins: [
+    new CleanWebpackPlugin(), //新版本默认删除webpack输出中的所有文件
+    // new CleanWebpackPlugin(["./dist"], {
+    //   root: path.resolve(__dirname, "..")
+    // }),
     new UglifyJSPlugin()
   ],
-  //去掉console.log
   optimization: {
     minimizer: [
       new TerserWebpackPlugin({
         terserOptions: {
           compress: {
-            drop_console: true,
+            drop_console: false,//去掉console.log
           },
         },
       }),

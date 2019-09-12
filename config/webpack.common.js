@@ -1,17 +1,19 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const CleanWebpackPlugin = require("clean-webpack-plugin")
+// const CleanWebpackPlugin = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const ENV = process.env.NODE_ENV
-
 module.exports = {
   entry: {
     polyfill: "babel-polyfill",
     app: "./src/view/index.js",
     ventor: ["axios"]
   },
+  // resolve: {
+  //   extensions: ['.js', '.ts', '.tsx']
+  // },
   plugins: [
-    new CleanWebpackPlugin(), //新版本默认删除webpack输出中的所有文件
+    // new CleanWebpackPlugin(), //新版本默认删除webpack输出中的所有文件
     // new CleanWebpackPlugin(["./dist"], {
     //   root: path.resolve(__dirname, "..")
     // }),
@@ -54,6 +56,13 @@ module.exports = {
             loader: "babel-loader"
           }
         ]
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "ts-loader",
+        }
       },
       {
         test: /\.css$/,
