@@ -16,9 +16,7 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/should/should.js',
-      'src/view/b.js',
-      'src/view/quz.js',
-      'test/b.spec.js',
+      'test/test.spec.js',
       'Enter empty string to move to the next question.'
     ],
 

@@ -14,8 +14,6 @@
   "author": "atom-xi",
   "license": "ISC",
   "devDependencies": {
-    "@types/mocha": "^5.2.7",
-    "@types/should": "^13.0.0",
     "autoprefixer": "^9.6.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
