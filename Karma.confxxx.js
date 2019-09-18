@@ -1,6 +1,6 @@
 // Karma configuration
-// Generated on Tue Sep 17 2019 15:50:56 GMT+0800 (GMT+08:00)
-
+// Generated on Thu Sep 12 2019 11:49:14 GMT+0800 (GMT+08:00)
+var webpack = require('webpack');
 module.exports = function (config) {
   config.set({
 
@@ -19,22 +19,52 @@ module.exports = function (config) {
       'src/view/b.js',
       'src/view/quz.js',
       'test/b.spec.js',
-      'Enter empty string to move to the next question.'
+      'test/**/*.js',
+      'test/**/*.ts',
+      'test/**/*.spec.ts'
+      // { pattern: 'You can use glob patterns, eg. "js/*.js" or "test/**/*Spec.js".', included: false }
     ],
 
 
     // list of files / patterns to exclude
     exclude: [
-      'Should any of the files included by the previous patterns be excluded ?'
     ],
 
-
+    // 必须
+    plugins: [
+      'karma-mocha',
+      'karma-chrome-launcher',
+      'karma-webpack',
+      'karma-spec-reporter'
+    ],
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/*.spec.ts': ['webpack'],
+      'test/**/*.ts': ['webpack']
     },
-
-
+    webpack: {
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: [
+              {
+                loader: "babel-loader"
+              }
+            ]
+          },
+          {
+            test: /\.ts$/,
+            loader: 'ts-loader'
+          }
+        ]
+      },
+      resolve: {
+        extensions: ['.ts']
+      }
+    },
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter

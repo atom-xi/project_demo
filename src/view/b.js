@@ -1,10 +1,10 @@
-function List(head: any, tail: any) {
+function List(head, tail) {
   this.head = head || 0;
   this.tail = tail || null;
 }
 
 // Returns a new List containing the array.
-List.list = function (array: any) {
+List.list = function (array) {
   var sentinel = new List(),
     len = array.length,
     p, i;
